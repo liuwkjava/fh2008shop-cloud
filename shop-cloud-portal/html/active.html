@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+</head>
+<body>
+<h1 style="color: red">用户未激活,请进行<a href="#" onclick="sendActiveMail1()">激活</a>后,在登录</h1>
+<h1 style="color: red">用户未激活,请进行<a href="#" onclick="sendActiveMail2()">激活</a>后,在登录</h1>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.cookie.min.js"></script>
+<script src="../js/common.js"></script>
+</body>
+<script>
+    function sendActiveMail1() {
+        var v_memberData = $.cookie("memberData");
+        console.log(v_memberData);
+        $.ajax({
+            type:"post",
+            url:server_url+"/member/sendActiveMail1",
+            contentType:"application/json",
+            data:v_memberData,
+            success:function (res) {
+                if (res.code==200){
+                    $.removeCookie("memberData");
+                    location.href="mailsuccess.html";
+                }
+            }
+        })
+    }
+
+    function sendActiveMail2() {
+        var v_memberData = $.cookie("memberData");
+        var v_param = eval('('+v_memberData+')')
+        $.ajax({
+            type:"post",
+            url:server_url+"/member/sendActiveMail2",
+            data:v_param,
+            success:function (res) {
+                if (res.code==200){
+                    $.removeCookie("memberData");
+                    location.href="mailsuccess.html";
+                }
+            }
+        })
+    }
+</script>
+</html>
