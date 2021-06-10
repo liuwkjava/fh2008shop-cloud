@@ -8,6 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("com.fh.shop.api.member.mapper")
 public class ShopMember {
     public static void main(String[] args) {
+
+        System.out.println("今天学习Git");
+
         SpringApplication.run(ShopMember.class,args);
     }
 }
